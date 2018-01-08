@@ -1,3 +1,4 @@
+function  makechart(datachart) {
 var margin = {top: 20, right: 50, bottom: 30, left: 50},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
@@ -29,9 +30,10 @@ var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
+    .attr("id","AppleStockChart")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.tsv("data.tsv", function(error, data) {
+d3.tsv(datachart, function(error, data) {
   if (error) throw error;
 
   data.forEach(function(d) {
@@ -95,3 +97,5 @@ d3.tsv("data.tsv", function(error, data) {
     focus.select("text").text(formatCurrency(d.close));
   }
 });
+}
+makechart("data.tsv")
